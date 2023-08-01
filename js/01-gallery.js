@@ -30,17 +30,22 @@ createMarkup()
 function handleClick(event) {
     event.preventDefault();
 
-    for (let i=0; i < galleryItems.length; i++) {
         if (event.target.nodeName === "IMG") {
-            const instance = basicLightbox.create(`<img scr="${item.original}" width="800" height="600">`);
+            const instance = basicLightbox.create(`<img src="${item.original}" width="800" height="600">`);
             instance.show()
-            document.body.addEventListener("keydown", (e) => {
-                if (e.code === "Escape") {
-                    instance.close();
-                }
-            });
+
+        function keydownHandler(e) {
+            if (e.code === "Escape") {
+                instance.close();
+                document.body.removeEventListener("keydown", keydownHandler);
+            }
         }
+
+        document.body.addEventListener("keydown", keydownHandler);
     }
 }
+
+document.body.addEventListener("click", clickHandler);
+ 
 console.log(galleryItems);
 
