@@ -31,7 +31,7 @@ function handleClick(event) {
     event.preventDefault();
 
         if (event.target.nodeName === "IMG") {
-            const instance = basicLightbox.create(`<img src="${item.original}" width="800" height="600">`);
+            const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">`);
             instance.show()
 
         function keydownHandler(e) {
@@ -45,7 +45,6 @@ function handleClick(event) {
     }
 }
 
-document.body.addEventListener("click", clickHandler);
  
 console.log(galleryItems);
 
